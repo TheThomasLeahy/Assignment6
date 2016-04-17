@@ -49,7 +49,7 @@ public class TestTicketOffice {
 		TicketClient c2 = new TicketClient("nonconc2");
 		TicketClient c3 = new TicketClient("nonconc3");
 		c1.requestTicket();
-		c2.requestTicket();
+		c2.requestTicket();jg
 		c3.requestTicket();
 	}
 
