@@ -34,6 +34,7 @@ class ThreadedTicketClient implements Runnable {
 			e.printStackTrace();
 		}
 	}
+
 }
 
 public class TicketClient {
@@ -62,6 +63,8 @@ public class TicketClient {
 		System.out.println(hostName + "," + threadName + " got one ticket");
 	}
 
+	
+	
 	void sleep() {
 		try {
 			Thread.sleep(100);
@@ -69,4 +72,7 @@ public class TicketClient {
 			e.printStackTrace();
 		}
 	}
+	
+
+	
 }

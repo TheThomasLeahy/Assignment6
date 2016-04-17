@@ -7,19 +7,14 @@
 package assignment6;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
-
-import static org.junit.Assert.fail;
-
-import org.junit.Test;
+//import static org.junit.Assert.fail;
 
 public class TestTicketOffice {
 
 	public static int score = 0;
 
-	// @Test
+	@Test
 	public void basicServerTest() {
 		try {
 			TicketServer.start(16789);

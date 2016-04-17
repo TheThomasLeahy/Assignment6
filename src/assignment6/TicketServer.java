@@ -47,4 +47,17 @@ class ThreadedTicketServer implements Runnable {
 		}
 
 	}
+	
+	
+	String bestAvailableSeat(Theater config, Client client){
+	    
+	}
+	
+	void markAvailableSeatTaken(Theater config, Client client){
+	    
+	}
+	
+	void printTicketSeat(Seat soldSeat){
+	    
+	}
 }
