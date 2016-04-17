@@ -1,1 +1,12 @@
 To do
+
+-Add more test cases in TestTicketOffice.java
+
+Repeat the following for each client in line until show is sold out
+Seat <- find the bestAvailableSeat()
+If there is an available seat then
+markAvailableSeatTaken(Seat)
+printTicketSeat(Seat)
+Else
+Output to the screen “sorry, we are sold out”
+End repeat

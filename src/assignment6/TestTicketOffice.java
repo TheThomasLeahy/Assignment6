@@ -1,9 +1,15 @@
+
 /*
  *Michael Spearing
  *Thomas Leahy tpl335 Niraj Th 2:00-3:30
  */
 
 package assignment6;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
 
 import static org.junit.Assert.fail;
 
@@ -91,3 +97,4 @@ public class TestTicketOffice {
 
 	}
 }
+
