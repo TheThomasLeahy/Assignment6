@@ -43,6 +43,9 @@ class ThreadedTicketServer implements Runnable {
 
 	public void run() {
 		// TODO 422C
+		
+		System.out.println("Inside server run");
+		
 		ServerSocket serverSocket;
 		try {
 			serverSocket = new ServerSocket(TicketServer.PORT);
@@ -54,7 +57,7 @@ class ThreadedTicketServer implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+	/*
 	String bestAvailableSeat(Theater config, Client client)
 	{
 	}
@@ -62,5 +65,5 @@ class ThreadedTicketServer implements Runnable {
 	void markAvailableSeatTaken(Theater config, Client client)
 	{
 	    
-	}
+	}*/
 }

@@ -24,6 +24,9 @@ class ThreadedTicketClient implements Runnable {
 	public void run() {
 		System.out.flush();
 		try {
+			
+			System.out.println("Inside TC run");
+			
 			Socket echoSocket = new Socket(hostname, TicketServer.PORT);
 			// PrintWriter out =
 			new PrintWriter(echoSocket.getOutputStream(), true);
@@ -60,7 +63,7 @@ public class TicketClient {
 	void requestTicket() {
 		// TODO thread.run()
 		tc.run();
-		printTicketSeat();
+		//printTicketSeat();
 	}
 	
 	
