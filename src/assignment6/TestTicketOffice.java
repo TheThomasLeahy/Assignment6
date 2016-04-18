@@ -29,6 +29,7 @@ public class TestTicketOffice {
 	public void testServerCachedHardInstance() {
 		try {
 			TicketServer.start(16790);
+			
 		} catch (Exception e) {
 			fail();
 		}

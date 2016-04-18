@@ -23,6 +23,8 @@ public class TicketServer {
 		Runnable serverThread = new ThreadedTicketServer();
 		Thread t = new Thread(serverThread);
 		t.start();
+		
+		
 	}
 }
 
@@ -45,7 +47,6 @@ class ThreadedTicketServer implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 	
 	/*
