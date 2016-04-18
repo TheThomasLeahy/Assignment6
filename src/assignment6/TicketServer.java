@@ -17,6 +17,9 @@ public class TicketServer {
 	// EE422C: no matter how many concurrent requests you get,
 	// do not have more than three servers running concurrently
 	final static int MAXPARALLELTHREADS = 3;
+	
+	// Data Structure for the theater
+	Theater myTheater = new Theater();
 
 	public static void start(int portNumber) throws IOException {
 		PORT = portNumber;
@@ -34,6 +37,9 @@ class ThreadedTicketServer implements Runnable {
 	String threadname = "X";
 	String testcase;
 	TicketClient sc;
+	
+	
+	
 
 	public void run() {
 		// TODO 422C
@@ -49,19 +55,12 @@ class ThreadedTicketServer implements Runnable {
 		}
 	}
 	
-	/*
-	String bestAvailableSeat(Theater config, Client client){
-	    
+	String bestAvailableSeat(Theater config, Client client)
+	{
 	}
 	
 	void markAvailableSeatTaken(Theater config, Client client)
 	{
 	    
 	}
-	
-	void printTicketSeat(Seat soldSeat)
-	{
-	    
-	}
-	*/
 }

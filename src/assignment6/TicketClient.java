@@ -60,7 +60,15 @@ public class TicketClient {
 	void requestTicket() {
 		// TODO thread.run()
 		tc.run();
+		printTicketSeat();
+	}
+	
+	
+	
+	void printTicketSeat(Seat soldSeat)
+	{
 		System.out.println(hostName + "," + threadName + " got one ticket");
+
 	}
 
 	
