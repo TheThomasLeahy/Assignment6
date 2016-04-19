@@ -38,9 +38,6 @@ class ThreadedTicketServer implements Runnable {
 	String testcase;
 	TicketClient sc;
 	
-	
-	
-
 	public void run() {
 		// TODO 422C
 		
