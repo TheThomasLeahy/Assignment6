@@ -19,15 +19,14 @@ public class TicketServer {
 	final static int MAXPARALLELTHREADS = 3;
 	
 	// Data Structure for the theater
-	Theater myTheater = new Theater();
+	public static Theater myTheater = null;
 
 	public static void start(int portNumber) throws IOException {
+		myTheater = new Theater(); 
 		PORT = portNumber;
 		Runnable serverThread = new ThreadedTicketServer();
 		Thread t = new Thread(serverThread);
 		t.start();
-		
-		
 	}
 }
 

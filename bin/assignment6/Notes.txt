@@ -8,5 +8,35 @@ If there is an available seat then
 markAvailableSeatTaken(Seat)
 printTicketSeat(Seat)
 Else
-Output to the screen “sorry, we are sold out”
+Output to the screen ï¿½sorry, we are sold outï¿½
 End repeat
+
+
+
+______________________________________________________________________
+					Steps of the Program
+					
+1. Make the server
+	1.1 Create the theater object and fill it with seats
+	1.2 Why is socket made here?
+		1.2.1 ServerSocket vs. socket
+	1.3 PORT is assigned when the start() is called
+2.  Do we need multiple servers?? or TicketClients??
+	2.1 Up to three servers I think
+	2.2 Then PORT needs to be a unique number for each itteration
+
+
+For the server Socket:
+
+public class Server extends Thread  
+   {  
+       ...  
+       void run()  
+       {  
+           while(Still Tickets availible){
+              // serverSocket on "localhost", 1234  
+              Socket clientSock = serverSocket.accept();  // accept a new request
+              executor.execute(new ClientWorker(clientSock));  
+           }
+       }  
+   }
