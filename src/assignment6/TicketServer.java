@@ -59,11 +59,10 @@ class ThreadedTicketServer implements Runnable
 
 		System.out.println("TTS - Waiting for Input");
 		// Listen for ticket request
-		while (!in.ready())
+		while (in.readLine() == null)
 		{
 		    // Do nothing while we wait
 		}
-		in.readLine();
 		// Reads client request off of the buffered reader
 		System.out.println("TTS - Received Input");
 		
