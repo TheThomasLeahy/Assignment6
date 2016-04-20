@@ -16,12 +16,14 @@ class ThreadedTicketClient implements Runnable
     String threadname = "X";
     TicketClient sc;
     String customerName;
+    int portName;
 
-    public ThreadedTicketClient(TicketClient sc, String hostname, String threadname)
+    public ThreadedTicketClient(TicketClient sc, String hostname, String threadname, int portname)
     {
 	this.sc = sc;
 	this.hostname = hostname;
 	this.threadname = threadname;
+	this.portName = portname;
     }
 
     public void run()
@@ -29,7 +31,8 @@ class ThreadedTicketClient implements Runnable
 	System.out.flush();
 	try
 	{
-	    Socket echoSocket = new Socket(hostname, TicketServer.PORT);
+	    Socket echoSocket = new Socket(hostname, portName);
+	    //Need to change this
 
 	    PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
 	    // Request medium/stream to server
@@ -65,24 +68,26 @@ public class TicketClient
     String result = "dummy";
     String hostName = "";
     String threadName = "";
+    int portName = 2222;
 
-    TicketClient(String hostname, String threadname)
+    TicketClient(String hostname, String threadname, int portname)
     {
-	tc = new ThreadedTicketClient(this, hostname, threadname);
+	tc = new ThreadedTicketClient(this, hostname, threadname, portname);
 	hostName = hostname;
 	threadName = threadname;
+	portName = portname;
     }
-
+/*
     TicketClient(String name)
     {
-	this("localhost", name);
+	this("localhost", name, );
     }
 
     TicketClient()
     {
-	this("localhost", "unnamed client");
+	this("localhost", "unnamed client", 2222);
     }
-
+*/
     void requestTicket(String customerName)
     {
 	tc.customerName = customerName;

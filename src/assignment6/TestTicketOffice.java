@@ -15,6 +15,7 @@ public class TestTicketOffice
 
     public static int score = 0;
 
+    /*
     @Test
     public void basicServerTest()
     {
@@ -34,30 +35,33 @@ public class TestTicketOffice
 	}
 
     }
-
+*/
+    
     @Test
     public void testServerCachedHardInstance()
     {
 	Theater myTheater = new Theater();
+	int port1 = 16790;
+	int port2 = 17721;
 	try
 	{
-	    TicketServer.start(16790, myTheater);
-
+	    TicketServer.start(port1, myTheater);
+	    TicketServer.start(port2, myTheater);
 	} catch (Exception e)
 	{
 	    fail();
-
 	}
-	
-	for (int i = 0; i < 100; i ++)
+	String customerName = "Customer";
+	for (int i = 0; i < 100; i = i + 2)
 	{
-	TicketClient client1 = new TicketClient("localhost", "c1");
-	TicketClient client2 = new TicketClient("localhost", "c2");
-	client1.requestTicket();
-	client2.requestTicket();
+	    TicketClient client1 = new TicketClient("localhost", "c1", port1);
+	    TicketClient client2 = new TicketClient("localhost", "c2", port2);
+	    client1.requestTicket(customerName.concat(Integer.toString(i)));
+	    client2.requestTicket(customerName.concat(Integer.toString(i+1)));
 	}
     }
 
+    /*
     @Test
     public void twoNonConcurrentServerTest()
     {
@@ -126,5 +130,5 @@ public class TestTicketOffice
 	}
 
     }
-
+*/
 }

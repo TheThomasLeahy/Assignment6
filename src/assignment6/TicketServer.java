@@ -75,7 +75,8 @@ class ThreadedTicketServer implements Runnable
 		out.println(thisSeat.toString()); // returns data
 		out.close();
 	    }
-
+	    serverSocket.close();
+	    
 	} catch (IOException e)
 	{
 	    e.printStackTrace();
