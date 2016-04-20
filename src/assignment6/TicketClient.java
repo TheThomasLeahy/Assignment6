@@ -49,7 +49,7 @@ class ThreadedTicketClient implements Runnable
 	    // Server sends us our ticket here
 
 	    // COME BACK AND FIX FORMATTING HERE
-	    System.out.println(this.customerName + "\t" + serverString);
+	    System.out.println("Server " + this.portName + "\t sold " + this.customerName + "\t" + serverString);
 
 	    // What is stdIn?
 

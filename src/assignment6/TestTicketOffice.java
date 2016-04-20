@@ -55,8 +55,9 @@ public class TestTicketOffice
 	for (int i = 0; i < 100; i = i + 2)
 	{
 	    TicketClient client1 = new TicketClient("localhost", "c1", port1);
-	    TicketClient client2 = new TicketClient("localhost", "c2", port2);
 	    client1.requestTicket(customerName.concat(Integer.toString(i)));
+	    
+	    TicketClient client2 = new TicketClient("localhost", "c2", port2);
 	    client2.requestTicket(customerName.concat(Integer.toString(i+1)));
 	}
     }
