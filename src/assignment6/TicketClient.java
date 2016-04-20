@@ -10,80 +10,89 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-class ThreadedTicketClient implements Runnable {
-	String hostname = "127.0.0.1";
-	String threadname = "X";
-	TicketClient sc;
+class ThreadedTicketClient implements Runnable
+{
+    String hostname = "127.0.0.1";
+    String threadname = "X";
+    TicketClient sc;
 
-	public ThreadedTicketClient(TicketClient sc, String hostname, String threadname) {
-		this.sc = sc;
-		this.hostname = hostname;
-		this.threadname = threadname;
-	}
+    public ThreadedTicketClient(TicketClient sc, String hostname, String threadname)
+    {
+	this.sc = sc;
+	this.hostname = hostname;
+	this.threadname = threadname;
+    }
 
-	public void run() {
-		System.out.flush();
-		try {
-			
-			System.out.println("Inside TC run");
-			
-			Socket echoSocket = new Socket(hostname, TicketServer.PORT);
-			// PrintWriter out =
-			new PrintWriter(echoSocket.getOutputStream(), true);
-			BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
-			BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-			echoSocket.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+    public void run()
+    {
+	System.out.flush();
+	System.out.println("TTC - RUN");
+	try
+	{
+	    Socket echoSocket = new Socket(hostname, TicketServer.PORT);
+	    // new PrintWriter(echoSocket.getOutputStream(), true);
+	    BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
+	    String servString = in.readLine();
+	    System.out.println(servString);
+	    // TicketClient.printTicketSeat(res);
+	    // PRINT TICKET TRANSACTION HERE (properly)
+	    BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+	    // What is stdIn?
+	    echoSocket.close();
+	} catch (Exception e)
+	{
+	    e.printStackTrace();
 	}
+    }
 
 }
 
-public class TicketClient {
-	ThreadedTicketClient tc;
-	String result = "dummy";
-	String hostName = "";
-	String threadName = "";
+public class TicketClient
+{
+    ThreadedTicketClient tc;
+    String result = "dummy";
+    String hostName = "";
+    String threadName = "";
 
-	TicketClient(String hostname, String threadname) {
-		tc = new ThreadedTicketClient(this, hostname, threadname);
-		hostName = hostname;
-		threadName = threadname;
-	}
+    TicketClient(String hostname, String threadname)
+    {
+	tc = new ThreadedTicketClient(this, hostname, threadname);
+	hostName = hostname;
+	threadName = threadname;
+    }
 
-	TicketClient(String name) {
-		this("localhost", name);
-	}
+    TicketClient(String name)
+    {
+	this("localhost", name);
+    }
 
-	TicketClient() {
-		this("localhost", "unnamed client");
-	}
+    TicketClient()
+    {
+	this("localhost", "unnamed client");
+    }
 
-	void requestTicket() {
-		// TODO thread.run()
-		tc.run();
-		//printTicketSeat();
-	}
-	
-	
-	
-	void printTicketSeat(Seat soldSeat)
+    void requestTicket()
+    {
+	// TODO thread.run()
+	tc.run();
+	// printTicketSeat();
+    }
+
+    void printTicketSeat(String soldSeat)
+    {
+	System.out.println(hostName + "," + threadName + " got one ticket");
+
+    }
+
+    void sleep()
+    {
+	try
 	{
-		System.out.println(hostName + "," + threadName + " got one ticket");
-
+	    Thread.sleep(100);
+	} catch (InterruptedException e)
+	{
+	    e.printStackTrace();
 	}
+    }
 
-	
-	
-	void sleep() {
-		try {
-			Thread.sleep(100);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
-
-	
 }

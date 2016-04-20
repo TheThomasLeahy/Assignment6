@@ -21,5 +21,11 @@ public class Theater
 	    	System.out.println("Theater Initialized! Let's get this show on the road!");
 	}
 
+	public Seat bestAvailableSeat()
+	{
+	    // TODO Auto-generated method stub
+	    return null;
+	}
+
 }
 

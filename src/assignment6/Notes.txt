@@ -40,3 +40,8 @@ public class Server extends Thread
            }
        }  
    }
+   
+   
+   Notes:
+   -Use BufferedReader and Buffered Writer to communicate between TicketClient and TicketServer
+   
