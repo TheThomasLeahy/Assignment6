@@ -26,7 +26,7 @@ public class TicketServer
     {
 	myTheater = theater;
 	PORT = portNumber;
-	Runnable serverThread = new ThreadedTicketServer();
+	Runnable serverThread = new ThreadedTicketServer(portNumber);
 	Thread t = new Thread(serverThread);
 	t.start();
     }
@@ -38,14 +38,21 @@ class ThreadedTicketServer implements Runnable
     String hostname = "127.0.0.1";
     String threadname = "X";
     String testcase;
+    int portNumber;
     TicketClient sc;
+
+    public ThreadedTicketServer(int portnumber)
+    {
+	// TODO Auto-generated constructor stub
+	this.portNumber = portnumber;
+    }
 
     public void run()
     {
 	ServerSocket serverSocket;
 	try
 	{
-	    serverSocket = new ServerSocket(TicketServer.PORT);
+	    serverSocket = new ServerSocket(this.portNumber);
 	    // ServerSocket makes this server 'listen' for client requests on
 	    // port 2222 on this machine
 
