@@ -27,14 +27,13 @@ class ThreadedTicketClient implements Runnable
     public void run()
     {
 	System.out.flush();
-	System.out.println("TTC - RUN");
 	try
 	{
 	    Socket echoSocket = new Socket(hostname, TicketServer.PORT);
 
 	    PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
 	    // Request medium/stream to server
-	    out.write(this.customerName);
+	    out.println(this.customerName);
 
 	    BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
 	    // BufferedReader stdIn = new BufferedReader(new
@@ -47,7 +46,7 @@ class ThreadedTicketClient implements Runnable
 	    // Server sends us our ticket here
 
 	    // COME BACK AND FIX FORMATTING HERE
-	    System.out.println(this.customerName + serverString);
+	    System.out.println(this.customerName + "\t" + serverString);
 
 	    // What is stdIn?
 

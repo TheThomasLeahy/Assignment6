@@ -14,7 +14,7 @@ import java.net.Socket;
 
 public class TicketServer
 {
-    static int PORT = 2222;
+    static int PORT;
     // EE422C: no matter how many concurrent requests you get,
     // do not have more than three servers running concurrently
     final static int MAXPARALLELTHREADS = 3;
@@ -57,14 +57,12 @@ class ThreadedTicketServer implements Runnable
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
-		System.out.println("TTS - Waiting for Input");
 		// Listen for ticket request
 		while (in.readLine() == null)
 		{
 		    // Do nothing while we wait
 		}
 		// Reads client request off of the buffered reader
-		System.out.println("TTS - Received Input");
 		
 		// Ticket Processing
 		
