@@ -49,8 +49,12 @@ class ThreadedTicketClient implements Runnable
 	    // Server sends us our ticket here
 
 	    // COME BACK AND FIX FORMATTING HERE
+	    if(!serverString.equals("NSL")){
 	    System.out.println("Server " + this.portName + "\t sold " + this.customerName + "\t" + serverString);
-
+	    }else
+	    {
+		System.out.println("Sorry, " + this.customerName + " we're out of tickets!");
+	    }
 	    // What is stdIn?
 
 	    echoSocket.close();

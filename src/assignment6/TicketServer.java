@@ -72,9 +72,7 @@ class ThreadedTicketServer implements Runnable
 		// Reads client request off of the buffered reader
 		
 		// Ticket Processing
-		
 		Seat thisSeat = bestAvailableSeat();
-		
 		markAvailableSeatTaken(thisSeat);
 
 		// Transmit String back to client
@@ -82,7 +80,22 @@ class ThreadedTicketServer implements Runnable
 		out.println(thisSeat.toString()); // returns data
 		out.close();
 	    }
-	    serverSocket.close();
+	    while(true)
+	    {
+		Socket clientSocket = serverSocket.accept();
+		// accept method waits until request arrives. returns a socket
+		// for client communication.
+		BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+		while (in.readLine() == null)
+		{
+		    // Do nothing while we wait
+		}
+		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+		out.println("NSL"); // returns data
+		out.close();
+		
+	    }
+	    //serverSocket.close();
 	    
 	} catch (IOException e)
 	{
