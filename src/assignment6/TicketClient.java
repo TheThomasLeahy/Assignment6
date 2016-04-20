@@ -15,6 +15,7 @@ class ThreadedTicketClient implements Runnable
     String hostname = "127.0.0.1";
     String threadname = "X";
     TicketClient sc;
+    String customerName;
 
     public ThreadedTicketClient(TicketClient sc, String hostname, String threadname)
     {
@@ -30,14 +31,26 @@ class ThreadedTicketClient implements Runnable
 	try
 	{
 	    Socket echoSocket = new Socket(hostname, TicketServer.PORT);
-	    // new PrintWriter(echoSocket.getOutputStream(), true);
+
+	    PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
+	    // Request medium/stream to server
+	    out.write(this.customerName);
+
 	    BufferedReader in = new BufferedReader(new InputStreamReader(echoSocket.getInputStream()));
-	    String servString = in.readLine();
-	    System.out.println(servString);
-	    // TicketClient.printTicketSeat(res);
-	    // PRINT TICKET TRANSACTION HERE (properly)
-	    BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+	    // BufferedReader stdIn = new BufferedReader(new
+	    // InputStreamReader(System.in));
+	    while (!in.ready())
+	    {
+		// Do nothing while we wait
+	    }
+	    String serverString = in.readLine();
+	    // Server sends us our ticket here
+
+	    // COME BACK AND FIX FORMATTING HERE
+	    System.out.println(this.customerName + serverString);
+
 	    // What is stdIn?
+
 	    echoSocket.close();
 	} catch (Exception e)
 	{
@@ -71,11 +84,10 @@ public class TicketClient
 	this("localhost", "unnamed client");
     }
 
-    void requestTicket()
+    void requestTicket(String customerName)
     {
-	// TODO thread.run()
-	tc.run();
-	// printTicketSeat();
+	tc.customerName = customerName;
+	tc.run(); // Sells ticket. Prints ticket to console.
     }
 
     void printTicketSeat(String soldSeat)

@@ -11,7 +11,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.locks.*;
 
 public class TicketServer
 {
@@ -22,12 +21,10 @@ public class TicketServer
 
     // Data Structure for the theater
     public static Theater myTheater = null;
-    public static Lock myLock;
 
-    public static void start(int portNumber, Theater theater, Lock thisLock) throws IOException
+    public static void start(int portNumber, Theater theater) throws IOException
     {
 	myTheater = theater;
-	myLock = thisLock;
 	PORT = portNumber;
 	Runnable serverThread = new ThreadedTicketServer();
 	Thread t = new Thread(serverThread);
@@ -45,36 +42,45 @@ class ThreadedTicketServer implements Runnable
 
     public void run()
     {
-	System.out.println("TTS - RUN");
 	ServerSocket serverSocket;
 	try
 	{
 	    serverSocket = new ServerSocket(TicketServer.PORT);
 	    // ServerSocket makes this server 'listen' for client requests on
 	    // port 2222 on this machine
+
 	    while (bestAvailableSeat() != null)
 	    {
 		Socket clientSocket = serverSocket.accept();
 		// accept method waits until request arrives. returns a socket
 		// for client communication.
-		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-		// Socket connection to sent a string message
+
+		BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+		System.out.println("TTS - Waiting for Input");
+		// Listen for ticket request
+		while (!in.ready())
+		{
+		    // Do nothing while we wait
+		}
+		in.readLine();
+		// Reads client request off of the buffered reader
+		System.out.println("TTS - Received Input");
 		
-		TicketServer.myLock.lock();
+		// Ticket Processing
+		
 		Seat thisSeat = bestAvailableSeat();
+		
 		markAvailableSeatTaken(thisSeat);
+
+		// Transmit String back to client
+		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 		out.println(thisSeat.toString()); // returns data
 		out.close();
-		TicketServer.myLock.unlock();
-
-		// BufferedReader in = new BufferedReader(new
-		// InputStreamReader(clientSocket.getInputStream()));
-		// IDK what this does
 	    }
 
 	} catch (IOException e)
 	{
-	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
     }
