@@ -9,8 +9,11 @@ public class Theater
     public int seatsPerRow = 50;
     private Seat[] tSeats = new Seat[rows * seatsPerRow];
     private Lock myLock;
-    
+    int iter = 0;
 
+    /**
+     * Theater Constructor
+     */
     public Theater()
     {
 	String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -24,29 +27,45 @@ public class Theater
 	    }
 	}
 	System.out.println("Theater Initialized! Let's get this show on the road!");
-	
+
 	myLock = new ReentrantLock();
     }
 
-    
+    /**
+     * Finds best available seat remaining
+     * @return
+     */
     public Seat bestAvailableSeat()
     {
-	//This thing needs to have a lock
-	//Maybe needs a queue?
-	
-	myLock.lock();
-	try{
-	for(int i = 0; i < tSeats.length ; i ++)
+	// This thing needs to have a lock
+	// Maybe needs a queue?
+
+	try
 	{
-	    if(tSeats[i].available())
+	    for (int i = 0; i < tSeats.length; i++)
 	    {
-		return tSeats[i];
+		if (tSeats[i].available())
+		{
+		    return tSeats[i];
+		}
 	    }
-	}
-	}
-	finally{
-	myLock.unlock();
+	} finally
+	{
+
 	}
 	return null;
+    }
+
+    /**
+     * Marks hte best available seat remaining as taken (sells it)
+     * @return
+     */
+    public Seat markBestAvailableSeatTaken()
+    {
+	myLock.lock();
+	Seat takenSeat = this.bestAvailableSeat();
+	takenSeat.Taken();
+	myLock.unlock();
+	return takenSeat;
     }
 }

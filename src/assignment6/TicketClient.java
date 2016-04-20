@@ -32,7 +32,7 @@ class ThreadedTicketClient implements Runnable
 	try
 	{
 	    Socket echoSocket = new Socket(hostname, portName);
-	    //Need to change this
+	    // Need to change this
 
 	    PrintWriter out = new PrintWriter(echoSocket.getOutputStream(), true);
 	    // Request medium/stream to server
@@ -49,9 +49,10 @@ class ThreadedTicketClient implements Runnable
 	    // Server sends us our ticket here
 
 	    // COME BACK AND FIX FORMATTING HERE
-	    if(!serverString.equals("NSL")){
-	    System.out.println("Server " + this.portName + "\t sold " + this.customerName + "\t" + serverString);
-	    }else
+	    if (!serverString.equals("NSL"))
+	    {
+		System.out.println("Server " + this.portName + "\t sold " + this.customerName + "\t" + serverString);
+	    } else
 	    {
 		System.out.println("Sorry, " + this.customerName + " we're out of tickets!");
 	    }
@@ -74,6 +75,12 @@ public class TicketClient
     String threadName = "";
     int portName = 2222;
 
+    /**
+     * Ticket Client Constructor
+     * @param hostname
+     * @param threadname
+     * @param portname
+     */
     TicketClient(String hostname, String threadname, int portname)
     {
 	tc = new ThreadedTicketClient(this, hostname, threadname, portname);
@@ -81,29 +88,30 @@ public class TicketClient
 	threadName = threadname;
 	portName = portname;
     }
-/*
-    TicketClient(String name)
-    {
-	this("localhost", name, );
-    }
 
-    TicketClient()
-    {
-	this("localhost", "unnamed client", 2222);
-    }
-*/
+    /**
+     * Requests a ticket from the threaded ticket client
+     * @param customerName
+     */
     void requestTicket(String customerName)
     {
 	tc.customerName = customerName;
 	tc.run(); // Sells ticket. Prints ticket to console.
     }
 
+   /**
+    * Prints a sold ticket seat 
+    * @param soldSeat
+    */
     void printTicketSeat(String soldSeat)
     {
 	System.out.println(hostName + "," + threadName + " got one ticket");
 
     }
 
+    /**
+     * Sleep function
+     */
     void sleep()
     {
 	try

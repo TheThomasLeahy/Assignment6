@@ -6,6 +6,11 @@ public class Seat
     int seatNumber;
     private SeatStatus status;
 
+    /**
+     * Seat constructor
+     * @param rowName
+     * @param seatNum
+     */
     Seat(String rowName, int seatNum)
     {
 	this.row = rowName;
@@ -13,16 +18,25 @@ public class Seat
 	this.status = SeatStatus.NotTaken;
     }
 
+    /**
+     * toString() for a object of type seat
+     */
     public String toString()
     {
 	return (this.row.concat(Integer.toString(this.seatNumber)));
     }
 
+    /**
+     * Marks a seat as taken
+     */
     public void Taken()
     {
 	this.status = SeatStatus.Taken;
     }
 
+    /**
+     * Returns if the seat is available
+     */
     public boolean available()
     {
 	if (this.status == SeatStatus.NotTaken)
@@ -36,6 +50,11 @@ public class Seat
 
 }
 
+/**
+ * Enum for SeatStatus - Taken or not?!
+ * @author thoma_000
+ *
+ */
 enum SeatStatus {
     Taken, NotTaken
 }

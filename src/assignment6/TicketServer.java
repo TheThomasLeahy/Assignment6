@@ -41,12 +41,20 @@ class ThreadedTicketServer implements Runnable
     int portNumber;
     TicketClient sc;
 
+    /**
+     * Initializes a server with a portnumber
+     * @param portnumber
+     */
     public ThreadedTicketServer(int portnumber)
     {
 	// TODO Auto-generated constructor stub
 	this.portNumber = portnumber;
     }
 
+    /**
+     * Run method. Purchases tickets for each request it receives from the
+     * clients.
+     */
     public void run()
     {
 	ServerSocket serverSocket;
@@ -72,9 +80,12 @@ class ThreadedTicketServer implements Runnable
 		// Reads client request off of the buffered reader
 		
 		// Ticket Processing
-		Seat thisSeat = bestAvailableSeat();
-		markAvailableSeatTaken(thisSeat);
-
+		
+//		Seat thisSeat = bestAvailableSeat();
+//		markAvailableSeatTaken(thisSeat);
+		
+		Seat thisSeat =  TicketServer.myTheater.markBestAvailableSeatTaken();
+		
 		// Transmit String back to client
 		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 		out.println(thisSeat.toString()); // returns data
@@ -103,12 +114,20 @@ class ThreadedTicketServer implements Runnable
 	}
     }
 
+    /**
+     * Finds the best available seats and reserves them
+     * @return
+     */
     Seat bestAvailableSeat()
     {
 	Seat thisIsTheBS = TicketServer.myTheater.bestAvailableSeat();
 	return thisIsTheBS;
     }
 
+    /**
+     * Marks the seat called as taken
+     * @param thisSeat
+     */
     void markAvailableSeatTaken(Seat thisSeat)
     {
 	thisSeat.Taken();
