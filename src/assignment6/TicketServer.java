@@ -26,7 +26,7 @@ public class TicketServer {
 		PORT = portNumber;
 		Runnable serverThread = new ThreadedTicketServer();
 		Thread t = new Thread(serverThread);
-		t.start();
+		t.start(); 
 	}
 }
 
