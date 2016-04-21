@@ -17,22 +17,33 @@ public class Theater
     public Theater()
     {
 	String s = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
+	int index = 0;
 	for (int i = 0; i < 26; i++)
 	{
 	    String rowString = s.substring(i, i + 1);
-	    for (int x = 1; x < 51; x++)
+	    int x;
+	    for (x = 108; x <= 121; x++)
 	    {
-		tSeats[(i * 50) + x - 1] = new Seat(rowString, x);
+		tSeats[index] = new Seat(rowString, x);
+		index++;
+	    }
+	    for (x = 101; x <= 107; x++)
+	    {
+		tSeats[index] = new Seat(rowString, x);
+		index++;
+	    }
+	    for (x = 122; x <= 128; x++)
+	    {
+		tSeats[index] = new Seat(rowString, x);
+		index++;
 	    }
 	}
-	System.out.println("Theater Initialized! Let's get this show on the road!");
-
 	myLock = new ReentrantLock();
     }
 
     /**
      * Finds best available seat remaining
+     * 
      * @return
      */
     public Seat bestAvailableSeat()
@@ -40,24 +51,20 @@ public class Theater
 	// This thing needs to have a lock
 	// Maybe needs a queue?
 
-	try
+	for (int i = 0; i < tSeats.length; i++)
 	{
-	    for (int i = 0; i < tSeats.length; i++)
+	    if (tSeats[i].available())
 	    {
-		if (tSeats[i].available())
-		{
-		    return tSeats[i];
-		}
+		return tSeats[i];
 	    }
-	} finally
-	{
-
 	}
+
 	return null;
     }
 
     /**
      * Marks hte best available seat remaining as taken (sells it)
+     * 
      * @return
      */
     public Seat markBestAvailableSeatTaken()

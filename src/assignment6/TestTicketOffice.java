@@ -23,7 +23,7 @@ public class TestTicketOffice
      {
      System.out.println("Start BasicServerTest");
      Theater myTheater = new Theater();
-     int port = 16790;
+     int port = 16666;
      try
      {
      TicketServer.start(port, myTheater);
@@ -117,9 +117,7 @@ public class TestTicketOffice
      {
      System.out.println("Start sellOutTest");
      Theater myTheater = new Theater();
-    
-    
-    
+
      int port = 16798;
      try
      {
@@ -129,7 +127,7 @@ public class TestTicketOffice
      fail();
      }
      String customerName = "Customer";
-     for (int i = 0; i < 1305; i++)
+     for (int i = 0; i < 500; i++)
      {
      TicketClient c1 = new TicketClient("localhost", "c1", port);
      c1.requestTicket(customerName.concat(Integer.toString(i)));
@@ -248,7 +246,7 @@ public class TestTicketOffice
 	    fail();
 	}
 
-	for (int i = 0; i < 1000; i = i + 9)
+	for (int i = 0; i < 300; i = i + 9)
 	{
 	    final TicketClient cP11 = new TicketClient("localhost", "cP11", port1);
 	    final TicketClient cP12 = new TicketClient("localhost", "cP12", port1);

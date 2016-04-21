@@ -51,7 +51,7 @@ class ThreadedTicketClient implements Runnable
 	    // COME BACK AND FIX FORMATTING HERE
 	    if (!serverString.equals("NSL"))
 	    {
-		System.out.println("Server " + this.portName + "\t sold " + this.customerName + "\t" + serverString);
+		System.out.println("Server " + this.portName + " sold the ticket " + serverString + " to " + this.customerName);
 	    } else
 	    {
 		System.out.println("Sorry, " + this.customerName + " we're out of tickets!");
