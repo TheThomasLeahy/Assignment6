@@ -1,5 +1,5 @@
 /*
- *Michael Spearing
+ *Michael Spearing MSS3627	Mehtaab F 2:00 - 3:30
  *Thomas Leahy tpl335 Niraj Th 2:00-3:30
  */
 
@@ -8,6 +8,8 @@ package assignment6;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import java.util.Random;
 //import static org.junit.Assert.fail;
 
 public class TestTicketOffice
@@ -18,7 +20,7 @@ public class TestTicketOffice
     /**
      * Simply Tests one server
      */
-     @Test
+    @Test
      public void basicServerTest()
      {
      System.out.println("Start BasicServerTest");
@@ -276,4 +278,41 @@ public class TestTicketOffice
 	System.out.println("End multServMultClientTest");
 	System.out.println("******************************************");
     }
+    
+    
+    @Test
+    public void randomNumberOfCustomersTest()
+    {
+    	Random rand = new Random();
+    	System.out.println("Start randomNumberOfCustomersTest");
+    	Theater myTheater = new Theater();
+    	int port1 = 12795;
+    	int port2 = 12721;
+    	try
+    	{
+    		TicketServer.start(port1, myTheater);
+    		TicketServer.start(port2, myTheater);
+    	} catch (Exception e)
+    	{
+    		fail();
+    	}
+    	String customerName = "Customer";
+    	int numberOfCustomers = 0;
+    	while(numberOfCustomers < 100)
+    	{
+    		numberOfCustomers = rand.nextInt(500);
+    	}
+    	
+    	for (int i = 0; i < numberOfCustomers; i = i + 2)
+    	{
+    		TicketClient client1 = new TicketClient("localhost", "c1", port1);
+    		client1.requestTicket(customerName.concat(Integer.toString(i)));
+
+    		TicketClient client2 = new TicketClient("localhost", "c2", port2);
+    		client2.requestTicket(customerName.concat(Integer.toString(i + 1)));
+    	}
+    	System.out.println("End RandomNumberOfCustomersTest");
+    	System.out.println("******************************************");
+    }
+
 }
