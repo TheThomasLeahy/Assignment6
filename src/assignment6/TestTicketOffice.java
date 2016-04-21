@@ -31,6 +31,7 @@ public class TestTicketOffice
      {
      fail();
      }
+     
      String customerName = "Customer";
      for (int i = 0; i < 100; i++)
      {
